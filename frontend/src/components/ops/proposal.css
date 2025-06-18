@@ -1,0 +1,25 @@
+.footer-container {
+    width: 100%;
+    background-color: #2A467A;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .footer-container img {
+    height: 20px; /* Adjust image height */
+    margin-right: 8px; /* Add spacing between image & text */
+  }
+  
+  .print-container {
+    width: 800px;
+    padding: 20px;
+    margin: 0 auto;
+    background: white;
+  }
+  
