@@ -34,13 +34,13 @@ function Users() {
   const fetchData = async () => {
     try {
       const manageroleRes = await axios.get(
-        "http://localhost:5000/api/manageroleData"
+        "https://cednwenlms.onrender.com/api/manageroleData"
       );
       const adminDataRes = await axios.get(
-        "http://localhost:5000/api/adminData"
+        "https://cednwenlms.onrender.com/api/adminData"
       );
-      const jobroleRes = await axios.get("http://localhost:5000/api/cmdata");
-      const imagesRes = await axios.get("http://localhost:5000/upload");
+      const jobroleRes = await axios.get("https://cednwenlms.onrender.com/api/cmdata");
+      const imagesRes = await axios.get("https://cednwenlms.onrender.com/upload");
       setManagerole(manageroleRes.data);
       setadminData(adminDataRes.data);
       setJobroledata(jobroleRes.data);
@@ -91,7 +91,7 @@ function Users() {
           newFile,
         };
         const res = await axios.put(
-          `http://localhost:5000/api/adminData/${userId}`,
+          `https://cednwenlms.onrender.com/api/adminData/${userId}`,
           updatedProduct
         );
         const updatedAdminData = [...adminData];
@@ -100,7 +100,7 @@ function Users() {
         setEditingIndex(null); // Reset editing mode
       } else {
         // Add new user
-        const res = await axios.post("http://localhost:5000/upload", formData);
+        const res = await axios.post("https://cednwenlms.onrender.com/upload", formData);
         setadminData((prev) => [...prev, res.data]);
       }
       setIsOpen(false);
@@ -135,7 +135,7 @@ function Users() {
   const handleDelete = async (index) => {
     try {
       const id = adminData[index]._id;
-      await axios.delete(`http://localhost:5000/api/adminData/${id}`);
+      await axios.delete(`https://cednwenlms.onrender.com/api/adminData/${id}`);
       setadminData((prev) => prev.filter((_, i) => i !== index));
       setShowConfirm(false);
     } catch (error) {

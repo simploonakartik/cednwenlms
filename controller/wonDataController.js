@@ -24,7 +24,7 @@ const updatewonData = async (req, res) => {
     try {
         const { id } = req.params;
         const { InvoiceNote, CertificateNote } = req.body;
-        const baseURL = "http://localhost:5000/uploads/";
+        const baseURL = "https://cednwenlms.onrender.com/uploads/";
         const Invoice = req.files?.Invoice ? `${baseURL}${req.files.Invoice[0].filename}` : null;
         const Certificate = req.files?.Certificate ? `${baseURL}${req.files.Certificate[0].filename} ` : null;
         const updatedadminProduct = await wonData.findByIdAndUpdate(

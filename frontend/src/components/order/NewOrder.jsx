@@ -130,7 +130,7 @@ function NewOrder() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/cmdata");
+        const res = await axios.get("https://cednwenlms.onrender.com/api/cmdata");
         setCmData(res.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -239,7 +239,7 @@ function NewOrder() {
     }
     try {
       if (clientType === "New Client") {
-        const res = await axios.post("http://localhost:5000/api/cmdata", {
+        const res = await axios.post("https://cednwenlms.onrender.com/api/cmdata", {
           companyName,
           clientID,
           fullName,
@@ -261,7 +261,7 @@ function NewOrder() {
         setCounter(newCounter);
         localStorage.setItem("clientCounter", newCounter);
       }
-      const response = await axios.post("http://localhost:5000/api/newOrder", formDataObj, {
+      const response = await axios.post("https://cednwenlms.onrender.com/api/newOrder", formDataObj, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -281,7 +281,7 @@ function NewOrder() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/userdata");
+        const res = await axios.get("https://cednwenlms.onrender.com/api/userdata");
         setProductData(res.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -317,7 +317,7 @@ function NewOrder() {
     formdata.append("description", description);
     formdata.append("sellingPrice", sellingPrice);
     try {
-      await axios.post("http://localhost:5000/userdata", formdata);
+      await axios.post("https://cednwenlms.onrender.com/userdata", formdata);
       setAddProduct(false);
     } catch (error) {
       console.error("Error adding product:", error);
@@ -426,7 +426,7 @@ function NewOrder() {
       const formData = new FormData();
       formData.append("Invoice", invoicefile);
       const response = await axios.post(
-        "http://localhost:5000/api/newOrder",
+        "https://cednwenlms.onrender.com/api/newOrder",
         formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -444,7 +444,7 @@ function NewOrder() {
   const fetchadminData = async () => {
     try {
       const adminDataRes = await axios.get(
-        "http://localhost:5000/api/adminData"
+        "https://cednwenlms.onrender.com/api/adminData"
       );
       const userNames = adminDataRes.data.map(admin => admin.userName);
       setAdmindata(userNames);
@@ -480,7 +480,7 @@ function NewOrder() {
 
   const fetchdepartmentData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/getdepartment");
+      const response = await axios.get("https://cednwenlms.onrender.com/api/getdepartment");
       setDepartmentData(response.data);
     } catch (error) {
       console.log(error);

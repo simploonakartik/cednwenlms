@@ -27,7 +27,7 @@ function Dashboard() {
 
   const fetchClientName = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/cmdata");
+      const res = await axios.get("https://cednwenlms.onrender.com/api/cmdata");
       setCmData(res.data);
     } catch (error) {
       console.log(error)
@@ -41,11 +41,11 @@ function Dashboard() {
   const fetchOrderData = async () => {
     try {
       const [clientResponse, productResponse, proposalResponse, newOrderResponse, wondata] = await Promise.all([
-        axios.get("http://localhost:5000/api/cmdata"),
-        axios.get("http://localhost:5000/api/userdata"),
-        axios.get("http://localhost:5000/api/getNewproposal"),
-        axios.get("http://localhost:5000/api/getNewOrder"),
-        axios.get("http://localhost:5000/api/getwonData")
+        axios.get("https://cednwenlms.onrender.com/api/cmdata"),
+        axios.get("https://cednwenlms.onrender.com/api/userdata"),
+        axios.get("https://cednwenlms.onrender.com/api/getNewproposal"),
+        axios.get("https://cednwenlms.onrender.com/api/getNewOrder"),
+        axios.get("https://cednwenlms.onrender.com/api/getwonData")
       ]);
 
       setClient(clientResponse.data);
@@ -86,7 +86,7 @@ function Dashboard() {
 
   const handleDeleteorder = async (index) => {
     const idToDelete = newOrder[index]._id;
-    await axios.delete(`http://localhost:5000/api/deleteOrder/${idToDelete}`)
+    await axios.delete(`https://cednwenlms.onrender.com/api/deleteOrder/${idToDelete}`)
     setShowneworderConfirm(false);
     fetchOrderData();
   };
@@ -110,7 +110,7 @@ function Dashboard() {
 
   const handleDeleteProposal = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/deleteProposal/${id}`);
+      await axios.delete(`https://cednwenlms.onrender.com/api/deleteProposal/${id}`);
       // Update state locally instead of re-fetching
       setNewProposal((prev) => prev.filter((proposal) => proposal._id !== id));
       setNewProposal((prev) => prev.filter((user) => user._id !== id));

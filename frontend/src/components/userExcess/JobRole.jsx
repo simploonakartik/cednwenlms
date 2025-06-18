@@ -39,7 +39,7 @@ function JobRole() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/manageroleData");
+        const res = await axios.get("https://cednwenlms.onrender.com/api/manageroleData");
         setManageroleData(res.data);
       } catch (error) {
         console.error("Error fetching Job Role:", error);
@@ -62,7 +62,7 @@ function JobRole() {
       try {
         const id = manageroleData[editingIndex]._id;
         await axios.put(
-          `http://localhost:5000/api/manageroleData/${id}`,
+          `https://cednwenlms.onrender.com/api/manageroleData/${id}`,
           roleData
         );
 
@@ -81,7 +81,7 @@ function JobRole() {
       // Add new role
       try {
         const res = await axios.post(
-          "http://localhost:5000/api/manageroleData",
+          "https://cednwenlms.onrender.com/api/manageroleData",
           roleData
         );
         setManageroleData((prev) => [...prev, res.data]);
@@ -128,7 +128,7 @@ function JobRole() {
   const handleDelete = async (index) => {
     try {
       const id = manageroleData[index]._id;
-      await axios.delete(`http://localhost:5000/api/manageroleData/${id}`);
+      await axios.delete(`https://cednwenlms.onrender.com/api/manageroleData/${id}`);
       setManageroleData((prev) => prev.filter((_, i) => i !== index));
       setShowConfirm(false);
     } catch (error) {

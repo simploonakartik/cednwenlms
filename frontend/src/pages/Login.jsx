@@ -12,7 +12,7 @@ function Login() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/adminData");
+        const res = await axios.get("https://cednwenlms.onrender.com/api/adminData");
         setadminData(res.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -34,7 +34,7 @@ function Login() {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/login", { email, password });
+      await axios.post("https://cednwenlms.onrender.com/api/login", { email, password });
      
       localStorage.setItem("userName", user.userName);
       localStorage.setItem("imageURL", user.imagefile);

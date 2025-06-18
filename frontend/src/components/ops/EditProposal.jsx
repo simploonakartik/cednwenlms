@@ -78,7 +78,7 @@ function EditProposal() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/cmdata");
+        const res = await axios.get("https://cednwenlms.onrender.com/api/cmdata");
         setCmData(res.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -96,7 +96,7 @@ function EditProposal() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/userdata");
+        const res = await axios.get("https://cednwenlms.onrender.com/api/userdata");
         setProductData(res.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -111,13 +111,13 @@ function EditProposal() {
 
     try {
       await axios.put(
-        `http://localhost:5000/api/updateproposal/${id}`,
+        `https://cednwenlms.onrender.com/api/updateproposal/${id}`,
         formData
       );
     
       toast.success("Proposal Edit Successfully...", { autoClose: 2000 });
       if (formData.Status === "Won") {
-        await axios.post(`http://localhost:5000/api/wonData/`, formData)
+        await axios.post(`https://cednwenlms.onrender.com/api/wonData/`, formData)
       }
       navigate("/ops");
     } catch (error) {
@@ -197,7 +197,7 @@ function EditProposal() {
   const fetchadminData = async () => {
     try {
       const adminDataRes = await axios.get(
-        "http://localhost:5000/api/adminData"
+        "https://cednwenlms.onrender.com/api/adminData"
       );
       const userNames = adminDataRes.data.map(admin => admin.userName);
       setAdmindata(userNames);

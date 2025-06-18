@@ -14,7 +14,7 @@ function Sidebar() {
     }
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/manageroleData");
+        const res = await axios.get("https://cednwenlms.onrender.com/api/manageroleData");
         const roleData = res.data.find((role) => role.roleName === jobrole);
         setManagerole(roleData || {});
       } catch (error) {

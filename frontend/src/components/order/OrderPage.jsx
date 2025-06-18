@@ -33,7 +33,7 @@ function OrderPage() {
 
     const fetchNewOrder = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/api/getNewOrder")
+            const response = await axios.get("https://cednwenlms.onrender.com/api/getNewOrder")
             setOrders(response.data)
         } catch (error) {
             console.log(error)
@@ -57,14 +57,14 @@ function OrderPage() {
         setShowNewOrderConfirm(true);
     }
     const HandleDeleteNewOrder = async (id) => {
-        await axios.delete(`http://localhost:5000/api/deleteOrder/${id}`)
+        await axios.delete(`https://cednwenlms.onrender.com/api/deleteOrder/${id}`)
         setShowNewOrderConfirm(false);
         fetchNewOrder();
     }
 
     const fetchOPSdata = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/api/getwonData")
+            const response = await axios.get("https://cednwenlms.onrender.com/api/getwonData")
             setWonorders(response.data)
         } catch (error) {
             console.log(error)
@@ -88,7 +88,7 @@ function OrderPage() {
         setShowConfirm(true);
     }
     const handleDeletewonData = async (id) => {
-        await axios.delete(`http://localhost:5000/api/deletewonData/${id}`)
+        await axios.delete(`https://cednwenlms.onrender.com/api/deletewonData/${id}`)
         setShowConfirm(false);
         fetchOPSdata();
     }

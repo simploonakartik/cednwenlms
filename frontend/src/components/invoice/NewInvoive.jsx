@@ -125,7 +125,7 @@ function NewInvoive() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/cmdata");
+        const res = await axios.get("https://cednwenlms.onrender.com/api/cmdata");
         setCmData(res.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -206,7 +206,7 @@ function NewInvoive() {
 
         updatedFormData = { ...updatedFormData, ClientName: companyName };
 
-        const res = await axios.post("http://localhost:5000/api/cmdata", {
+        const res = await axios.post("https://cednwenlms.onrender.com/api/cmdata", {
           companyName,
           clientID,
           fullName,
@@ -232,7 +232,7 @@ function NewInvoive() {
         ...updatedFormData,
         rows,
       };
-      await axios.post("http://localhost:5000/api/newinvoice", payload);
+      await axios.post("https://cednwenlms.onrender.com/api/newinvoice", payload);
       
       navigate("/invoices");
     } catch (error) {
@@ -243,7 +243,7 @@ function NewInvoive() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/userdata");
+        const res = await axios.get("https://cednwenlms.onrender.com/api/userdata");
         setProductData(res.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -279,7 +279,7 @@ function NewInvoive() {
     formdata.append("description", description);
     formdata.append("sellingPrice", sellingPrice);
     try {
-      await axios.post("http://localhost:5000/userdata", formdata);
+      await axios.post("https://cednwenlms.onrender.com/userdata", formdata);
       setAddProduct(false);
     } catch (error) {
       console.error("Error adding product:", error);
@@ -372,7 +372,7 @@ function NewInvoive() {
   const fetchadminData = async () => {
     try {
       const adminDataRes = await axios.get(
-        "http://localhost:5000/api/adminData"
+        "https://cednwenlms.onrender.com/api/adminData"
       );
       const userNames = adminDataRes.data.map(admin => admin.userName);
       setAdmindata(userNames);
@@ -404,7 +404,7 @@ function NewInvoive() {
   };
   const fetchdepartmentData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/getdepartment");
+      const response = await axios.get("https://cednwenlms.onrender.com/api/getdepartment");
       setDepartmentData(response.data);
     } catch (error) {
       console.log(error);

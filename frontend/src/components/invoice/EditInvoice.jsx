@@ -67,7 +67,7 @@ function EditInvoice() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/cmdata");
+        const res = await axios.get("https://cednwenlms.onrender.com/api/cmdata");
         setCmData(res.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -84,7 +84,7 @@ function EditInvoice() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/userdata");
+        const res = await axios.get("https://cednwenlms.onrender.com/api/userdata");
         setProductData(res.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -98,7 +98,7 @@ function EditInvoice() {
     const id = proposalData?._id;
     try {
       await axios.put(
-        `http://localhost:5000/api/updateinvoice/${id}`,
+        `https://cednwenlms.onrender.com/api/updateinvoice/${id}`,
         { ...formData, paymentrecord }
       );
       
@@ -180,7 +180,7 @@ function EditInvoice() {
   const fetchadminData = async () => {
     try {
       const adminDataRes = await axios.get(
-        "http://localhost:5000/api/adminData"
+        "https://cednwenlms.onrender.com/api/adminData"
       );
       const userNames = adminDataRes.data.map(admin => admin.userName);
       setAdmindata(userNames);
