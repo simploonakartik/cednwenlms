@@ -88,7 +88,7 @@ function Products() {
           "http://localhost:5000/userdata",
           formData
         );
-        console.log(res.data)
+       
         setUsedata((prev) => [...prev, res.data]);
         setIsOpen(false);
       } catch (error) {

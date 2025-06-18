@@ -78,7 +78,7 @@ function Proposals() {
     try {
       await axios.delete(`http://localhost:5000/api/deleteProposal/${id}`);
       fetchData();
-      console.log("Proposal deleted successfully.");
+      
       setShowConfirm(false);
       setDeleteIndex(null);
     } catch (error) {

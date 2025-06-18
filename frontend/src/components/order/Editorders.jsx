@@ -27,7 +27,7 @@ function Editorders() {
         Invoice: orderData?.Invoice || "",
         Certificate: orderData?.Certificate || "",
     });
-    console.log("formData.InvoiceNote", formData.InvoiceNote)
+    
     const numberToWords = (num) => {
         if (num === 0) return "Zero Rupees";
 
@@ -146,7 +146,7 @@ function Editorders() {
                 },
             }
             );
-            console.log("Data update successful");
+         
             toast.success("Proposal Edit Successfully...", { autoClose: 2000 });
             navigate("/orders");
         } catch (error) {

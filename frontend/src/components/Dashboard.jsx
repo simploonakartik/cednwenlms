@@ -114,7 +114,7 @@ function Dashboard() {
       // Update state locally instead of re-fetching
       setNewProposal((prev) => prev.filter((proposal) => proposal._id !== id));
       setNewProposal((prev) => prev.filter((user) => user._id !== id));
-      console.log("Proposal deleted successfully.");
+
       setShowConfirm(false);
       setDeleteIndex(null);
     } catch (error) {

@@ -115,7 +115,7 @@ function EditOrder() {
                 },
             }
             );
-            console.log("Data update successful");
+      
             toast.success("Proposal Edit Successfully...", { autoClose: 2000 });
             navigate("/orders");
         } catch (error) {

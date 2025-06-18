@@ -233,7 +233,7 @@ function NewInvoive() {
         rows,
       };
       await axios.post("http://localhost:5000/api/newinvoice", payload);
-      console.log("Data saved successfully:", payload);
+      
       navigate("/invoices");
     } catch (error) {
       console.error("Error saving data:", error);

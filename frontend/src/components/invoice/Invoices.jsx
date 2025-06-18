@@ -57,7 +57,7 @@ function Invoices() {
             console.error("Error deleting product:", error);
         }
     }
-    console.log("invoices", invoices)
+   
 
     const handleViewTaxInvoice = (id) => {
         const proposalToView = invoices.find((proposal) => proposal._id === id);

@@ -63,7 +63,7 @@ function Order() {
         }
         return null;
       }).filter((item) => item !== null);
-      console.log(mergedData)
+      
       setWonData(mergedData)
       localStorage.setItem("wonData", JSON.stringify(mergedData))
     } catch (error) {

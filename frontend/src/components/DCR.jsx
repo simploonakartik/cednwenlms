@@ -198,7 +198,7 @@ function DCR() {
     try {
       await axios.delete(`http://localhost:5000/api/deletedcr/${id}`);
       fetchDCRdata((prev) => prev.filter(user => user._id !== id));
-      console.log("data deleted successfull")
+    
       setShowConfirm(false);
     } catch (error) {
       console.log(error)
@@ -272,7 +272,7 @@ function DCR() {
         comments,
         status,
       });
-      console.log("data updated successfull")
+     
       setIsEditOpen(false)
       fetchDCRdata()
     } catch (error) {

@@ -123,7 +123,7 @@ function NewOrder() {
     CertificateNote: "",
     InvoiceNote: ""
   });
-  console.log("formData", formData)
+ 
 
   const handleSearch = () => { };
 
@@ -266,7 +266,7 @@ function NewOrder() {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("Data saved successfully:", response.data);
+     
       setMessage("Order created successfully!");
       if (response.data.data) {
         setUploadedFileUrl(response.data.data.Certificate);

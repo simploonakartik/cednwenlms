@@ -101,7 +101,7 @@ function EditInvoice() {
         `http://localhost:5000/api/updateinvoice/${id}`,
         { ...formData, paymentrecord }
       );
-      console.log("Data update successful");
+      
       toast.success("Proposal Edit Successfully...", { autoClose: 2000 });
       navigate("/invoices");
     } catch (error) {

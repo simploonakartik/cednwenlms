@@ -20,14 +20,14 @@ function Login() {
     };
     fetchData();
   }, []);
-console.log("kk",adminData)
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const user = adminData.find(
       (admin) => admin.emailId === email && admin.password === password
     );
-    console.log(user);
+  
     if (!user) {
       alert("Email or Password are not found");
       return;
@@ -35,7 +35,7 @@ console.log("kk",adminData)
 
     try {
       await axios.post("http://localhost:5000/api/login", { email, password });
-      console.log("successfull");
+     
       localStorage.setItem("userName", user.userName);
       localStorage.setItem("imageURL", user.imagefile);
       // Navigate to dashboard with user role

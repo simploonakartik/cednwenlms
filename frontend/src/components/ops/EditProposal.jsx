@@ -114,7 +114,7 @@ function EditProposal() {
         `http://localhost:5000/api/updateproposal/${id}`,
         formData
       );
-      console.log("Data update successful");
+    
       toast.success("Proposal Edit Successfully...", { autoClose: 2000 });
       if (formData.Status === "Won") {
         await axios.post(`http://localhost:5000/api/wonData/`, formData)

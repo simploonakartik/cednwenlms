@@ -242,7 +242,7 @@ function NewProposal() {
         rows,
       };
       await axios.post("http://localhost:5000/api/newproposal", payload);
-      console.log("Data saved successfully:", payload);
+    
       navigate("/ops");
     } catch (error) {
       console.error("Error saving data:", error);
