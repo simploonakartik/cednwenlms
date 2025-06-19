@@ -34,13 +34,11 @@ function Users() {
   const fetchData = async () => {
     try {
       const manageroleRes = await axios.get(
-        "https://cednwenlms.onrender.com/api/manageroleData"
+        "http://localhost:5000/api/manageroleData"
       );
-      const adminDataRes = await axios.get(
-        "https://cednwenlms.onrender.com/api/adminData"
-      );
-      const jobroleRes = await axios.get("https://cednwenlms.onrender.com/api/cmdata");
-      const imagesRes = await axios.get("https://cednwenlms.onrender.com/upload");
+      const adminDataRes = await axios.get("http://localhost:5000/api/getUser");
+      const jobroleRes = await axios.get("http://localhost:5000/api/cmdata");
+      const imagesRes = await axios.get("http://localhost:5000/upload");
       setManagerole(manageroleRes.data);
       setadminData(adminDataRes.data);
       setJobroledata(jobroleRes.data);
@@ -56,26 +54,36 @@ function Users() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!file) {
-      alert("please upload a file!");
-      return;
-    }
+    // if (!file) {
+    //   alert("please upload a file!");
+    //   return;
+    // }
 
-    const postId = uuidv4();
-    const blob = file.slice(0, file.size, "image/jpeg");
-    const newFile = new File([blob], `${postId}_post.jpeg`, {
-      type: "image/jpeg",
-    });
+    // const postId = uuidv4();
+    // const blob = file.slice(0, file.size, "image/jpeg");
+    // const newFile = new File([blob], `${postId}_post.jpeg`, {
+    //   type: "image/jpeg",
+    // });
 
-    const formData = new FormData();
-    formData.append("imagefile", newFile);
-    formData.append("userName", userName);
-    formData.append("employeeId", employeeId);
-    formData.append("emailId", emailId);
-    formData.append("password", password);
-    formData.append("jobrole", jobrole);
-    formData.append("mobileNo", mobileNo);
-    formData.append("location", location);
+    // const formData = new FormData();
+    // formData.append("userName", userName);
+    // formData.append("employeeId", employeeId);
+    // formData.append("emailId", emailId);
+    // formData.append("password", password);
+    // formData.append("jobrole", jobrole);
+    // formData.append("mobileNo", mobileNo);
+    // formData.append("location", location);
+
+    const payload = {
+      userName,
+      employeeId,
+      emailId,
+      password,
+      jobrole,
+      mobileNo,
+      location,
+    };
+
     try {
       if (editingIndex !== null) {
         // Update existing user
@@ -88,19 +96,22 @@ function Users() {
           jobrole,
           mobileNo,
           location,
-          newFile,
+          // newFile,
         };
         const res = await axios.put(
-          `https://cednwenlms.onrender.com/api/adminData/${userId}`,
+          `http://localhost:5000/api/updateUser/${userId}`,
           updatedProduct
         );
         const updatedAdminData = [...adminData];
         updatedAdminData[editingIndex] = res.data;
         setadminData(updatedAdminData);
-        setEditingIndex(null); // Reset editing mode
+        setEditingIndex(null);
       } else {
         // Add new user
-        const res = await axios.post("https://cednwenlms.onrender.com/upload", formData);
+        const res = await axios.post(
+          "http://localhost:5000/api/postUser",
+          payload
+        );
         setadminData((prev) => [...prev, res.data]);
       }
       setIsOpen(false);
@@ -117,7 +128,7 @@ function Users() {
     setJobrole("");
     setMobileNo("");
     setLocation("");
-    setFile("");
+    // setFile("");
   };
 
   const handleEdit = (index) => {
@@ -135,7 +146,7 @@ function Users() {
   const handleDelete = async (index) => {
     try {
       const id = adminData[index]._id;
-      await axios.delete(`https://cednwenlms.onrender.com/api/adminData/${id}`);
+      await axios.delete(`http://localhost:5000/api/deleteUser/${id}`);
       setadminData((prev) => prev.filter((_, i) => i !== index));
       setShowConfirm(false);
     } catch (error) {
@@ -205,7 +216,7 @@ function Users() {
   const filtereddata = adminData.map(
     ({ password, _id, __v, imageUrl, imagefile, uploadPhoto, ...rest }) => rest
   );
-  
+
   return (
     <div>
       <Sidebar />
@@ -267,7 +278,7 @@ function Users() {
                   {/* Form Fields */}
                   <div className="grid grid-cols-2 gap-x-6 gap-y-4">
                     <div>
-                      <label className="font-normal text-[#202020] text-sm max-xl:text-xs" >
+                      <label className="font-normal text-[#202020] text-sm max-xl:text-xs">
                         Employee Name
                       </label>
                       <input
@@ -326,7 +337,7 @@ function Users() {
                         onChange={(e) => setJobrole(e.target.value)}
                         className="border px-3 py-[0.35rem] text-sm max-xl:text-xs mt-1 font-normal text-[#A1A7C4] w-full rounded-md border-[#aaaaaa] focus:outline-none focus:ring-1 focus:ring-[#E84000]"
                         value={jobrole}
-                      // required
+                        // required
                       >
                         <option value="" disabled>
                           --Select Job Role--
@@ -366,8 +377,9 @@ function Users() {
                       <button
                         type="button"
                         onClick={() => setShowPassword((prev) => !prev)}
-                        className={`absolute right-3 ${showMessage ? "top-[55%]" : "top-[55%]"
-                          } transform -translate-y-1/2 text-[#A1A7C4] hover:text-[#E84000]`}
+                        className={`absolute right-3 ${
+                          showMessage ? "top-[55%]" : "top-[55%]"
+                        } transform -translate-y-1/2 text-[#A1A7C4] hover:text-[#E84000]`}
                       >
                         <i
                           className={
@@ -395,11 +407,13 @@ function Users() {
                             setShowMessage(false);
                           }
                         }}
-                        className={`border px-3 py-[0.35rem] text-sm max-xl:text-xs mt-1 w-full font-normal text-[#202020] rounded-md ${showMessage ? "border-red-500" : "border-[#aaaaaa]"
-                          } focus:outline-none focus:ring-1 ${showMessage
+                        className={`border px-3 py-[0.35rem] text-sm max-xl:text-xs mt-1 w-full font-normal text-[#202020] rounded-md ${
+                          showMessage ? "border-red-500" : "border-[#aaaaaa]"
+                        } focus:outline-none focus:ring-1 ${
+                          showMessage
                             ? "focus:ring-red-500"
                             : "focus:ring-[#E84000]"
-                          } pr-10`}
+                        } pr-10`}
                         type={showPassword2 ? "text" : "password"}
                         placeholder="Re-Enter Password"
                         value={password2}
@@ -407,8 +421,9 @@ function Users() {
                       <button
                         type="button"
                         onClick={() => setShowPassword2((prev) => !prev)}
-                        className={`absolute right-3 ${showMessage ? "top-[55%]" : "top-[55%]"
-                          } transform -translate-y-1/2 text-[#A1A7C4] hover:text-[#E84000]`}
+                        className={`absolute right-3 ${
+                          showMessage ? "top-[55%]" : "top-[55%]"
+                        } transform -translate-y-1/2 text-[#A1A7C4] hover:text-[#E84000]`}
                       >
                         <i
                           className={
@@ -425,9 +440,9 @@ function Users() {
                       )}
                     </div>
                   </div>
-                  <div className="">
+                  {/* <div className="">
                     <div className="flex items-center rounded-md border border-gray-300">
-                      {/* Hidden File Input */}
+                     
                       <input
                         id="file_input"
                         type="file"
@@ -436,7 +451,7 @@ function Users() {
                         className="hidden"
                         onChange={handleFileChange}
                       />
-                      {/* Styled Button */}
+                    
                       <label
                         htmlFor="file_input"
                         className="flex items-center font-medium text-white text-sm max-xl:text-xs justify-center gap-3 px-4 py-[0.35rem] bg-[#E84000] rounded-md shadow cursor-pointer hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2"
@@ -444,12 +459,12 @@ function Users() {
                         <i className="fa-solid fa-cloud-arrow-up"></i>
                         Upload Photo
                       </label>
-                      {/* Helper Text */}
+                      
                       <span className="text-gray-500 ml-2 font-normal  text-sm max-xl:text-xs">
                         Upload profile photo
                       </span>
                     </div>
-                    {/* Display Feedback */}
+                   
                     {file ? (
                       <p className="mt-1 text-sm max-xl:text-xs text-gray-600">
                         <strong>{file.name}</strong>
@@ -457,9 +472,9 @@ function Users() {
                     ) : (
                       ""
                     )}
-                  </div>
+                  </div> */}
 
-                  {file && (
+                  {/* {file && (
                     <div>
                       <img
                         src={file}
@@ -467,7 +482,7 @@ function Users() {
                         className="w-20 h-20 object-cover rounded-full border"
                       />
                     </div>
-                  )}
+                  )} */}
                   {/* Submit Button */}
                   <div className="mt-0 flex justify-start gap-3">
                     <button
@@ -568,9 +583,16 @@ function Users() {
                 ) : (
                   <>
                     <tr>
-                      <td colSpan="10" className="text-center text-sm max-xl:text-xs text-[#5A607F] py-5 border rounded-md">
+                      <td
+                        colSpan="10"
+                        className="text-center text-sm max-xl:text-xs text-[#5A607F] py-5 border rounded-md"
+                      >
                         <div className="flex flex-col items-center justify-center">
-                          <img src={myImage} alt="Description" className="mb-2" />
+                          <img
+                            src={myImage}
+                            alt="Description"
+                            className="mb-2"
+                          />
                           <span>No User Available.</span>
                         </div>
                       </td>
@@ -605,15 +627,18 @@ function Users() {
           </div>
           <section className="flex justify-between items-center mt-4 text-sm max-xl:text-xs font-normal">
             <button
-              className={`px-4 py-[0.35rem] rounded-md ${currentPage === 1 ? "bg-gray-300" : "bg-[#E84000] text-white"
-                }`}
+              className={`px-4 py-[0.35rem] rounded-md ${
+                currentPage === 1 ? "bg-gray-300" : "bg-[#E84000] text-white"
+              }`}
               onClick={handlePrev}
               disabled={currentPage === 1}
             >
               Previous
             </button>
             <div className="">
-              <span className="text-base max-xl:text-sm font-medium">Page : </span>
+              <span className="text-base max-xl:text-sm font-medium">
+                Page :{" "}
+              </span>
               <select
                 className="px-3 py-[0.35rem] border rounded-md text-sm max-xl:text-xs focus:outline-none border-[#E84000]"
                 value={entriesPerPage}
@@ -627,10 +652,11 @@ function Users() {
               </select>
             </div>
             <button
-              className={`px-4 py-[0.35rem] rounded-md ${currentPage === totalPages
-                ? "bg-gray-300"
-                : "bg-[#E84000] text-white"
-                }`}
+              className={`px-4 py-[0.35rem] rounded-md ${
+                currentPage === totalPages
+                  ? "bg-gray-300"
+                  : "bg-[#E84000] text-white"
+              }`}
               onClick={handleNext}
               disabled={currentPage === totalPages}
             >

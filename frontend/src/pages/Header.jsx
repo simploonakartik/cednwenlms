@@ -46,16 +46,7 @@ function Header({ name }) {
           onClick={handleToggle}
           className="flex items-center bg-white border border-gray-300 rounded-full px-2 py-1 cursor-pointer hover:shadow-md transition-shadow"
         >
-          <div className="text-sm max-xl:text-xs">
-            <span className="font-normal flex justify-center gap-2 items-center text-sm xl:text-base  text-gray-800">
-              <img
-                src={userimage}
-                alt="User Profile"
-                className=" h-8  w-8 rounded-full object-cover border border-gray-300"
-              />
-              {userName}
-            </span>
-          </div>
+          
         </div>
         {toggle && (
           <div

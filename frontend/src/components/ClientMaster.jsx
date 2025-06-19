@@ -72,7 +72,7 @@ function ClientMaster() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("https://cednwenlms.onrender.com/api/cmdata");
+        const res = await axios.get("http://localhost:5000/api/cmdata");
         setUserCMdata(res.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -110,7 +110,7 @@ function ClientMaster() {
           pocSections,
         };
         await axios.put(
-          `https://cednwenlms.onrender.com/api/cmdata/${editingIndex}`,
+          `http://localhost:5000/api/cmdata/${editingIndex}`,
           updatedcmProduct
         );
         setUserCMdata((prev) =>
@@ -125,7 +125,7 @@ function ClientMaster() {
       }
     } else {
       try {
-        const res = await axios.post("https://cednwenlms.onrender.com/api/cmdata", {
+        const res = await axios.post("http://localhost:5000/api/cmdata", {
           companyName,
           clientID,
           fullName,
@@ -208,7 +208,7 @@ function ClientMaster() {
   const handleDelete = async (id) => {
     try {
 
-      await axios.delete(`https://cednwenlms.onrender.com/api/cmdata/${id}`);
+      await axios.delete(`http://localhost:5000/api/cmdata/${id}`);
       setUserCMdata((prev) => prev.filter(user => user._id !== id));
       setShowConfirm(false);
     } catch (error) {
@@ -308,7 +308,7 @@ function ClientMaster() {
   const fetchadminData = async () => {
     try {
       const adminDataRes = await axios.get(
-        "https://cednwenlms.onrender.com/api/adminData"
+        "http://localhost:5000/api/adminData"
       );
       const userNames = adminDataRes.data.map(admin => admin.userName);
       setAdmindata(userNames);
@@ -323,7 +323,7 @@ function ClientMaster() {
 
   const fetchdepartmentData = async () => {
     try {
-      const response = await axios.get("https://cednwenlms.onrender.com/api/getdepartment");
+      const response = await axios.get("http://localhost:5000/api/getdepartment");
       setDepartmentData(response.data);
     } catch (error) {
       console.log(error);
@@ -343,7 +343,7 @@ function ClientMaster() {
 
   const fetchOrderData = async () => {
     try {
-      const response = await axios.get("https://cednwenlms.onrender.com/api/getNewOrder");
+      const response = await axios.get("http://localhost:5000/api/getNewOrder");
       setOrderData(response.data);
     } catch (error) {
       console.log(error);

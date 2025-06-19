@@ -70,7 +70,7 @@ function DCR() {
       setIsLoading(true);
       setError(null);
       try {
-        const res = await axios.get("https://cednwenlms.onrender.com/api/cmdata");
+        const res = await axios.get("http://localhost:5000/api/cmdata");
         setCmData(res.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -128,7 +128,7 @@ function DCR() {
     try {
 
       if (clientType === "New Client") {
-        await axios.post("https://cednwenlms.onrender.com/api/cmdata", {
+        await axios.post("http://localhost:5000/api/cmdata", {
           companyName,
           clientID,
           fullName,
@@ -148,7 +148,7 @@ function DCR() {
       }
 
 
-      await axios.post("https://cednwenlms.onrender.com/api/saveddcr", {
+      await axios.post("http://localhost:5000/api/saveddcr", {
         companyName,
         clientID,
         fullName,
@@ -180,7 +180,7 @@ function DCR() {
 
   const fetchDCRdata = async () => {
     try {
-      const response = await axios.get("https://cednwenlms.onrender.com/api/getdcr");
+      const response = await axios.get("http://localhost:5000/api/getdcr");
       setFetecheData(response.data)
     } catch (error) {
       console.log(error);
@@ -196,7 +196,7 @@ function DCR() {
   }
   const handleDeleteProposal = async (id) => {
     try {
-      await axios.delete(`https://cednwenlms.onrender.com/api/deletedcr/${id}`);
+      await axios.delete(`http://localhost:5000/api/deletedcr/${id}`);
       fetchDCRdata((prev) => prev.filter(user => user._id !== id));
     
       setShowConfirm(false);
@@ -250,7 +250,7 @@ function DCR() {
   const handleEditSubmit = async () => {
     try {
 
-      await axios.put(`https://cednwenlms.onrender.com/api/updatedcr/${editingIndex}`, {
+      await axios.put(`http://localhost:5000/api/updatedcr/${editingIndex}`, {
         companyName,
         clientID,
         fullName,
@@ -272,7 +272,7 @@ function DCR() {
         comments,
         status,
       });
-     
+    
       setIsEditOpen(false)
       fetchDCRdata()
     } catch (error) {
@@ -359,7 +359,7 @@ function DCR() {
 
   const fetchdepartmentData = async () => {
     try {
-      const response = await axios.get("https://cednwenlms.onrender.com/api/getdepartment");
+      const response = await axios.get("http://localhost:5000/api/getdepartment");
       setDepartmentData(response.data);
     } catch (error) {
       console.log(error);
@@ -372,7 +372,7 @@ function DCR() {
   const fetchadminData = async () => {
     try {
       const adminDataRes = await axios.get(
-        "https://cednwenlms.onrender.com/api/adminData"
+        "http://localhost:5000/api/adminData"
       );
       const userNames = adminDataRes.data.map(admin => admin.userName);
       setAdmindata(userNames);

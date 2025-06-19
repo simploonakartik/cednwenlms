@@ -25,7 +25,7 @@ function Products() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("https://cednwenlms.onrender.com/api/userdata");
+        const res = await axios.get("http://localhost:5000/api/getProduct");
         setUsedata(res.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -36,23 +36,32 @@ function Products() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const postId = uuidv4();
-    let newFile = null;
-    if (file) {
-      const blob = file.slice(0, file.size, "image/jpeg");
-      newFile = new File([blob], `${postId}_post.jpeg`, {
-        type: "image/jpeg",
-      });
-    }
+    // const postId = uuidv4();
+    // let newFile = null;
+    // if (file) {
+    //   const blob = file.slice(0, file.size, "image/jpeg");
+    //   newFile = new File([blob], `${postId}_post.jpeg`, {
+    //     type: "image/jpeg",
+    //   });
+    // }
 
-    const formData = new FormData();
-    formData.append("imageUrl", newFile);
-    formData.append("productName", productName);
-    formData.append("licenseType", licenseType);
-    formData.append("skuId", skuId);
-    formData.append("description", description);
-    formData.append("sellingPrice", sellingPrice);
-    formData.append("GST", GST);
+    const payload = {
+      productName,
+      licenseType,
+      skuId,
+      description,
+      sellingPrice,
+      GST,
+      
+    };
+    // const formData = new FormData();
+    // // formData.append("imageUrl", newFile);
+    // formData.append("productName", productName);
+    // formData.append("licenseType", licenseType);
+    // formData.append("skuId", skuId);
+    // formData.append("description", description);
+    // formData.append("sellingPrice", sellingPrice);
+    // formData.append("GST", GST);
 
     if (editingIndex !== null) {
       try {
@@ -64,11 +73,11 @@ function Products() {
           description,
           sellingPrice,
           GST,
-          newFile,
+          // newFile,
         };
 
         await axios.put(
-          `https://cednwenlms.onrender.com/api/userdata/${id}`,
+          `http://localhost:5000/api/updateProduct/${id}`,
           updatedProduct
         );
         setUsedata((prev) =>
@@ -85,8 +94,8 @@ function Products() {
       try {
 
         const res = await axios.post(
-          "https://cednwenlms.onrender.com/userdata",
-          formData
+          "http://localhost:5000/api/postProduct",
+          payload
         );
        
         setUsedata((prev) => [...prev, res.data]);
@@ -118,7 +127,7 @@ function Products() {
   const handleDelete = async (index) => {
     try {
       const id = userdata[index]._id;
-      await axios.delete(`https://cednwenlms.onrender.com/api/userdata/${id}`);
+      await axios.delete(`http://localhost:5000/api/deleteProduct/${id}`);
       setUsedata((prev) => prev.filter((_, i) => i !== index));
       setShowConfirm(false);
     } catch (error) {
@@ -268,7 +277,7 @@ function Products() {
                         onChange={(e) => setProductName(e.target.value)}
                         className="border px-3 py-[0.35rem] text-[#A1A7C4] font-normal rounded-md w-full focus:outline-none focus:ring-2 focus:ring-[#E84000]"
                         type="text"
-                        required
+                       
                         value={productName}
                         placeholder="Enter product name"
                       />
@@ -361,9 +370,9 @@ function Products() {
                       />
                     </div>
                   </div>
-                  <div className="">
+                  {/* <div className="">
                     <div className="flex items-center rounded-md border border-gray-300">
-                      {/* Hidden File Input */}
+                    
                       <input
                         id="file_input"
                         type="file"
@@ -372,7 +381,7 @@ function Products() {
                         className="hidden"
                         onChange={handleFileChange}
                       />
-                      {/* Styled Button */}
+                      
                       <label
                         htmlFor="file_input"
                         className="flex items-center font-medium text-white  justify-center gap-3 px-4 py-[0.35rem] bg-[#E84000] rounded-md shadow cursor-pointer hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2"
@@ -380,12 +389,12 @@ function Products() {
                         <i className="fa-solid fa-cloud-arrow-up"></i>
                         Upload Photo
                       </label>
-                      {/* Helper Text */}
+                    
                       <span className="text-gray-500 ml-2 font-normal  ">
                         Upload profile photo
                       </span>
                     </div>
-                    {/* Display Feedback */}
+                   
                     {file ? (
                       <p className="mt-1  text-gray-600">
                         <strong>{file.name}</strong>
@@ -393,8 +402,8 @@ function Products() {
                     ) : (
                       ""
                     )}
-                  </div>
-                  {file && (
+                  </div> */}
+                  {/* {file && (
                     <div>
                       <img
                         src={file}
@@ -402,7 +411,7 @@ function Products() {
                         className="w-32 h-20 object-cover rounded border mt-2"
                       />
                     </div>
-                  )}
+                  )} */}
                   <div className="mt-0 flex justify-start gap-3">
                     <button
                       type="submit"
@@ -440,9 +449,9 @@ function Products() {
                   <th className="px-2 w-32 py-[0.35rem] text-white text-sm max-xl:text-xs whitespace-nowrap font-medium text-left border-b border-gray-300">
                     selling Price
                   </th>
-                  <th className="px-2 w-32 py-[0.35rem] text-white text-sm max-xl:text-xs whitespace-nowrap font-medium text-left border-b border-gray-300">
+                  {/* <th className="px-2 w-32 py-[0.35rem] text-white text-sm max-xl:text-xs whitespace-nowrap font-medium text-left border-b border-gray-300">
                     Refrence Doc.
-                  </th>
+                  </th> */}
 
                   <th className="px-2 w-20 py-[0.35rem] text-white text-sm max-xl:text-xs whitespace-nowrap font-medium text-left border-b border-gray-300 rounded-tr-lg"></th>
                 </tr>
@@ -473,7 +482,7 @@ function Products() {
                       <td className="px-2 py-[0.35rem] leading-3 whitespace-nowrap text-sm max-xl:text-xs text-[#5A607F] border-b border-gray-300">
                         {user.sellingPrice}
                       </td>
-                      <td className="px-2 py-[0.35rem] leading-3 whitespace-nowrap text-sm max-xl:text-xs text-[#5A607F] border-b border-gray-300">
+                      {/* <td className="px-2 py-[0.35rem] leading-3 whitespace-nowrap text-sm max-xl:text-xs text-[#5A607F] border-b border-gray-300">
                         {" "}
                         <img
                           className="w-16 h-8 object-cover rounded"
@@ -481,7 +490,7 @@ function Products() {
                           alt="productImage"
                           srcset=""
                         />
-                      </td>
+                      </td> */}
                       <td className="px-2 leading-3  text-sm max-xl:text-xs whitespace-nowrap border-b text-center text-[#5A607F] border-gray-300">
                         <button
                           onClick={(e) => {

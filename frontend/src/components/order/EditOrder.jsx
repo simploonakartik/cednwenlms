@@ -64,7 +64,7 @@ function EditOrder() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get("https://cednwenlms.onrender.com/api/cmdata");
+                const res = await axios.get("http://localhost:5000/api/cmdata");
                 setCmData(res.data);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -82,7 +82,7 @@ function EditOrder() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get("https://cednwenlms.onrender.com/api/userdata");
+                const res = await axios.get("http://localhost:5000/api/userdata");
                 setProductData(res.data);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -108,14 +108,14 @@ function EditOrder() {
         }
         try {
             await axios.put(
-                `https://cednwenlms.onrender.com/api/updateOrder/${id}`,
+                `http://localhost:5000/api/updateOrder/${id}`,
                 formDataObj, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
             }
             );
-      
+          
             toast.success("Proposal Edit Successfully...", { autoClose: 2000 });
             navigate("/orders");
         } catch (error) {
@@ -273,7 +273,7 @@ function EditOrder() {
     const fetchadminData = async () => {
         try {
             const adminDataRes = await axios.get(
-                "https://cednwenlms.onrender.com/api/adminData"
+                "http://localhost:5000/api/adminData"
             );
             const userNames = adminDataRes.data.map(admin => admin.userName);
             setAdmindata(userNames);

@@ -111,6 +111,8 @@ app.use("/api", require("./routes/wonDataRoute"));
 app.use("/api", require("./routes/department"))
 app.use("/api", require("./routes/dcr"))
 app.use("/api", require("./routes/manageInvoice"))
+app.use("/api", require("./routes/UserRoute"))
+app.use("/api", require("./routes/Product"))
 // Start the server  
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

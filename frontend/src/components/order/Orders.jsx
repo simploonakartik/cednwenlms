@@ -44,9 +44,9 @@ function Order() {
   const fetchData = async () => {
     try {
       const [clientResponse, productResponse, proposalResponse] = await Promise.all([
-        axios.get("https://cednwenlms.onrender.com/api/cmdata"),
-        axios.get("https://cednwenlms.onrender.com/api/userdata"),
-        axios.get("https://cednwenlms.onrender.com/api/getNewproposal"),
+        axios.get("http://localhost:5000/api/cmdata"),
+        axios.get("http://localhost:5000/api/userdata"),
+        axios.get("http://localhost:5000/api/getNewproposal"),
       ]);
 
       setClientMasterData(clientResponse.data);
@@ -63,7 +63,7 @@ function Order() {
         }
         return null;
       }).filter((item) => item !== null);
-      
+    
       setWonData(mergedData)
       localStorage.setItem("wonData", JSON.stringify(mergedData))
     } catch (error) {
@@ -78,10 +78,10 @@ function Order() {
     try {
 
       const [clientResponse, productResponse, proposalResponse, newOrderResponse] = await Promise.all([
-        axios.get("https://cednwenlms.onrender.com/api/cmdata"),
-        axios.get("https://cednwenlms.onrender.com/api/userdata"),
-        axios.get("https://cednwenlms.onrender.com/api/getNewproposal"),
-        axios.get("https://cednwenlms.onrender.com/api/getNewOrder"),
+        axios.get("http://localhost:5000/api/cmdata"),
+        axios.get("http://localhost:5000/api/userdata"),
+        axios.get("http://localhost:5000/api/getNewproposal"),
+        axios.get("http://localhost:5000/api/getNewOrder"),
       ]);
 
       setClientMasterData(clientResponse.data);
@@ -155,7 +155,7 @@ function Order() {
   };
   const handleDeleteorder = async (index) => {
     const idToDelete = newOrder[index]._id;
-    await axios.delete(`https://cednwenlms.onrender.com/api/deleteOrder/${idToDelete}`)
+    await axios.delete(`http://localhost:5000/api/deleteOrder/${idToDelete}`)
     setShowneworderConfirm(false);
     fetchNewOrderData();
   };

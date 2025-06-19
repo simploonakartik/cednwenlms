@@ -27,7 +27,7 @@ function Editorders() {
         Invoice: orderData?.Invoice || "",
         Certificate: orderData?.Certificate || "",
     });
-    
+   
     const numberToWords = (num) => {
         if (num === 0) return "Zero Rupees";
 
@@ -139,7 +139,7 @@ function Editorders() {
         }
         try {
             await axios.put(
-                `https://cednwenlms.onrender.com/api/updateOrder/${id}`,
+                `http://localhost:5000/api/updateOrder/${id}`,
                 formDataObj, {
                 headers: {
                     "Content-Type": "multipart/form-data",
@@ -157,7 +157,7 @@ function Editorders() {
       useEffect(() => {
             const fetchData = async () => {
                 try {
-                    const res = await axios.get("https://cednwenlms.onrender.com/api/cmdata");
+                    const res = await axios.get("http://localhost:5000/api/cmdata");
                     setCmData(res.data);
                 } catch (error) {
                     console.error("Error fetching data:", error);

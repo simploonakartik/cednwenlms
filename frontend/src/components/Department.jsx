@@ -14,7 +14,7 @@ function Department() {
         e.preventDefault();
         if (editingIndex !== null) {
             const id = savedData[editingIndex]._id;
-            await axios.put(`https://cednwenlms.onrender.com/api/updatedepartment/${id}`, { name });
+            await axios.put(`http://localhost:5000/api/updatedepartment/${id}`, { name });
             setSaveData((prevData) => prevData.map((item, index) => index === editingIndex ? { ...item, name } : item));
             toast.success("Update Department Successfully..");
             setEditingIndex(null);
@@ -26,7 +26,7 @@ function Department() {
             return;
         }
         try {
-            const response = await axios.post("https://cednwenlms.onrender.com/api/savedepartment", { name });
+            const response = await axios.post("http://localhost:5000/api/savedepartment", { name });
             setSaveData((prevData) => [...prevData, response.data]);
             toast.success("Add Department Successfully..");
             setName("");
@@ -39,7 +39,7 @@ function Department() {
 
     const fetchdepartmentData = async () => {
         try {
-            const response = await axios.get("https://cednwenlms.onrender.com/api/getdepartment");
+            const response = await axios.get("http://localhost:5000/api/getdepartment");
             setSaveData(response.data);
         } catch (error) {
             console.log(error);
@@ -53,7 +53,7 @@ function Department() {
     const handleDelete = async (index) => {
         const id = savedData[index]._id;
         try {
-            await axios.delete(`https://cednwenlms.onrender.com/api/deletedepartment/${id}`);
+            await axios.delete(`http://localhost:5000/api/deletedepartment/${id}`);
             toast.success("Delete Department Successfully..");
             setSaveData((prevData) => prevData.filter((_, idx) => idx !== index));
         } catch (error) {

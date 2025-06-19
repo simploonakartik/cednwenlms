@@ -64,7 +64,7 @@ function Search() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("https://cednwenlms.onrender.com/api/cmdata");
+        const res = await axios.get("http://localhost:5000/api/cmdata");
         setUserCMdata(res.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -75,7 +75,7 @@ function Search() {
 
   const fetchOrderData = async () => {
     try {
-      const response = await axios.get("https://cednwenlms.onrender.com/api/getNewOrder");
+      const response = await axios.get("http://localhost:5000/api/getNewOrder");
       setOrderData(response.data);
     } catch (error) {
       console.log(error);
@@ -146,7 +146,7 @@ function Search() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("https://cednwenlms.onrender.com/api/cmdata");
+        const res = await axios.get("http://localhost:5000/api/cmdata");
         setUserCMdata(res.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -198,7 +198,7 @@ function Search() {
   const handleDelete = async (index) => {
     try {
       const id = userCMdata[index]._id;
-      await axios.delete(`https://cednwenlms.onrender.com/api/cmdata/${id}`);
+      await axios.delete(`http://localhost:5000/api/cmdata/${id}`);
       setUserCMdata((prev) => prev.filter((_, i) => i !== index));
       setShowConfirm(false);
     } catch (error) {
@@ -245,7 +245,7 @@ function Search() {
   const fetchadminData = async () => {
     try {
       const adminDataRes = await axios.get(
-        "https://cednwenlms.onrender.com/api/adminData"
+        "http://localhost:5000/api/adminData"
       );
       const userNames = adminDataRes.data.map(admin => admin.userName);
       setAdmindata(userNames);
@@ -260,7 +260,7 @@ function Search() {
 
   const fetchdepartmentData = async () => {
     try {
-      const response = await axios.get("https://cednwenlms.onrender.com/api/getdepartment");
+      const response = await axios.get("http://localhost:5000/api/getdepartment");
       setDepartmentData(response.data);
     } catch (error) {
       console.log(error);
